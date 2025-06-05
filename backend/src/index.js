@@ -20,7 +20,7 @@ app.post('/api/tasks', async (req, res) => {
     const task = await prisma.task.create({ data: { title, status } });
     res.json(task);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json({ error: 'Failed to create task' });
   }
   
 });
