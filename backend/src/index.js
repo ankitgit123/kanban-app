@@ -16,8 +16,13 @@ app.get('/', (_req, res) => {
 
 app.post('/api/tasks', async (req, res) => {
   const { title, status } = req.body;
-  const task = await prisma.task.create({ data: { title, status } });
-  res.json(task);
+  try {
+    const task = await prisma.task.create({ data: { title, status } });
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+  
 });
 
 app.listen(5000, () => {
